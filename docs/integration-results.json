@@ -1,0 +1,25 @@
+{
+  "verifiedAt": "2026-10-04T13:39:57.075Z",
+  "checks": [
+    "registration",
+    "patient creation",
+    "generic search",
+    "known DDI",
+    "allergy",
+    "persisted analysis",
+    "PDF",
+    "grounded chat",
+    "unsupported question",
+    "three model metadata",
+    "live unseen-pair prediction",
+    "owner isolation",
+    "dashboard"
+  ],
+  "unseenPair": [
+    "Meloxicam",
+    "Eltrombopag"
+  ],
+  "predictionModel": "XGBoost",
+  "chatMode": "retrieved-evidence (LLM key not configured)",
+  "pdfBytes": 2629
+}

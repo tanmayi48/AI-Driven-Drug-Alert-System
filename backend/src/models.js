@@ -1,0 +1,13 @@
+import mongoose from 'mongoose';
+const {Schema,model}=mongoose;
+const options={timestamps:true};
+export const User=model('User',new Schema({name:String,email:{type:String,unique:true,index:true},passwordHash:String},options));
+export const Patient=model('Patient',new Schema({owner:{type:Schema.Types.ObjectId,index:true},name:String,age:Number,sex:String,allergies:[String],conditions:[String],history:String},options));
+export const Drug=model('Drug',new Schema({canonicalId:{type:String,unique:true},name:{type:String,index:true},brands:[String],composition:String,drugClass:String,cid:Number,smiles:String,dosage:String,contraindications:[String],sideEffects:[String],source:String,demo:Boolean},options));
+export const Interaction=model('Interaction',new Schema({pairKey:{type:String,unique:true},drugA:String,drugB:String,severity:String,mechanism:String,management:String,source:String,demo:Boolean},options));
+export const AdrSignal=model('AdrSignal',new Schema({drugId:String,effect:String,source:String,signalType:String},options));
+export const Prescription=model('Prescription',new Schema({owner:{type:Schema.Types.ObjectId,index:true},patient:{type:Schema.Types.ObjectId,ref:'Patient'},medications:[{drugId:String,doseMg:Number,frequency:Number,durationDays:Number}],analysis:Schema.Types.Mixed},options));
+export const Alert=model('Alert',new Schema({prescription:Schema.Types.ObjectId,owner:Schema.Types.ObjectId,payload:Schema.Types.Mixed},options));
+export const ChatSession=model('ChatSession',new Schema({owner:Schema.Types.ObjectId,question:String,answer:Schema.Types.Mixed},options));
+export const Report=model('Report',new Schema({owner:Schema.Types.ObjectId,prescription:Schema.Types.ObjectId},options));
+export const ModelMetadata=model('ModelMetadata',new Schema({metadata:Schema.Types.Mixed},options));

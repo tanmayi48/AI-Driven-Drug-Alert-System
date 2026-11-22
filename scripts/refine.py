@@ -1,0 +1,11 @@
+from pathlib import Path
+server = Path('backend/src/server.js')
+text = server.read_text()
+text = text.replace('AdrSignal.find({drugId:{$in:ids}}).limit(100).lean()', 'AdrSignal.find({drugId:{$in:ids}}).lean()')
+text = text.replace('`${a.title}: ${a.explanation}. ${a.precaution}`', '`${a.demo ? "DEMONSTRATION FIXTURE: " : ""}${a.title}: ${a.explanation}. ${a.precaution}`')
+server.write_text(text)
+ui = Path('frontend/src/main.jsx')
+text = ui.read_text()
+text = text.replace("setToken('');setAnalysis(null);setMessages([]);", "setToken('');setAnalysis(null);setMessages([]);setSummary(null);setPatients([]);setDrugs([]);setPatientId('');setPrescriptionId('');setPage('Dashboard');")
+text = text.replace("{a.demo&&<span className=\"tag\">DEMONSTRATION FIXTURE</span>}", "{a.adrEffects?.length>0&&<details><summary>All {a.adrEffects.length} ADR associations</summary><p>{a.adrEffects.join(', ')}</p></details>}{a.demo&&<span className=\"tag\">DEMONSTRATION FIXTURE</span>}")
+ui.write_text(text)

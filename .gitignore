@@ -1,0 +1,11 @@
+.env
+.venv/
+node_modules/
+dist/
+__pycache__/
+*.pyc
+legacy_backup_*/
+data/raw/*
+data/processed/*
+artifacts/*
+!artifacts/.gitkeep
