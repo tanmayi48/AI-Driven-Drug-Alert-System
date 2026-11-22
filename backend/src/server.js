@@ -27,4 +27,4 @@ app.post('/api/chat',async(q,r)=>{const b=z.object({question:z.string().min(2).m
 app.use('/api',(_q,r)=>r.status(404).json({error:'API route not found'}));
 app.use(express.static(fileURLToPath(new URL('../../frontend/dist',import.meta.url))));
 app.use((err,_q,r,_n)=>{if(err.type==='entity.parse.failed')return r.status(400).json({error:'Invalid JSON request body'});if(err instanceof z.ZodError)return r.status(400).json({error:err.issues.map(i=>i.path.join('.')+': '+i.message).join('; ')});if(err.code===11000)return r.status(409).json({error:'Email already registered'});console.error(err.message);r.status(500).json({error:'Request failed. Check server configuration and services.'});});
-await mongoose.connect(mongoUri,{serverSelectionTimeoutMS:5000});app.listen(Number(process.env.PORT||4000),'127.0.0.1',()=>console.log('DrugAlert API ready at http://localhost:4000'));
+await mongoose.connect(mongoUri,{serverSelectionTimeoutMS:5000});app.listen(Number(process.env.PORT || 4000), '0.0.0.0', () => console.log('DrugAlert API ready'));
